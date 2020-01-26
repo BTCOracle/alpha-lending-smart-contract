@@ -8,3 +8,8 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "./interfaces/IAlphaDistributor.sol";
 import "./interfaces/IAlphaReceiver.sol";
 import "./interfaces/ILendingPool.sol";
+import "./interfaces/IPoolConfiguration.sol";
+import "./interfaces/IPriceOracle.sol";
+import "./interfaces/IVestingAlpha.sol";
+import "./AlToken.sol";
+import "./AlTokenDeployer.sol";

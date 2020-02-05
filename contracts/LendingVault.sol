@@ -13,3 +13,16 @@ import "./interfaces/IPriceOracle.sol";
 import "./interfaces/IVestingAlpha.sol";
 import "./AlToken.sol";
 import "./AlTokenDeployer.sol";
+import "./libraries/WadMath.sol";
+import "./libraries/Math.sol";
+
+/**
+ * @title Lending pool contract
+ * @notice Implements the core contract of lending pool.
+ * this contract manages all states and handles user interaction with the pool.
+ * @author Alpha
+ **/
+
+contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
+  using SafeMath for uint256;
+  using WadMath for uint256;

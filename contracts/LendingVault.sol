@@ -26,3 +26,10 @@ import "./libraries/Math.sol";
 contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   using SafeMath for uint256;
   using WadMath for uint256;
+  using Math for uint256;
+  using SafeERC20 for ERC20;
+
+  /*
+   * Lending pool smart contracts
+   * -----------------------------
+   * Each ERC20 token has an individual pool which users provide their liquidity to the pool.

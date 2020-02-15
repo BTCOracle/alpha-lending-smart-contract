@@ -33,3 +33,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * Lending pool smart contracts
    * -----------------------------
    * Each ERC20 token has an individual pool which users provide their liquidity to the pool.
+   * Users can use their liquidity as collateral to borrow any asset from all pools if their account is still healthy.
+   * By account health checking, the total borrow value must less than the total collateral value (collateral value is
+   * ~75% of the liquidity value depends on each token). Borrower need to repay the loan with accumulated interest.

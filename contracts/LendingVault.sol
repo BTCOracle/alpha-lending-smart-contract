@@ -36,3 +36,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * Users can use their liquidity as collateral to borrow any asset from all pools if their account is still healthy.
    * By account health checking, the total borrow value must less than the total collateral value (collateral value is
    * ~75% of the liquidity value depends on each token). Borrower need to repay the loan with accumulated interest.
+   * Liquidity provider would receive the borrow interest. In case of the user account is not healthy
+   * then liquidator can help to liquidate the user's account then receive the collateral with liquidation bonus as the reward.

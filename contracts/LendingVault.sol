@@ -41,3 +41,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    *
    * The status of the pool
    * -----------------------------
+   * The pool has 3 status. every pool will have only one status at a time.
+   * 1. INACTIVE - the pool is on initialized state or inactive state so it's not ready for user to do any actions. users can't deposit, borrow,
+   * repay and withdraw

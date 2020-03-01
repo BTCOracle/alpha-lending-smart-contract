@@ -44,3 +44,9 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * The pool has 3 status. every pool will have only one status at a time.
    * 1. INACTIVE - the pool is on initialized state or inactive state so it's not ready for user to do any actions. users can't deposit, borrow,
    * repay and withdraw
+   * 2 .ACTIVE - the pool is active. users can deposit, borrow, repay, withdraw and liquidate
+   * 3. CLOSED - the pool is waiting for inactive state. users can clear their account by repaying, withdrawal, liquidation but can't deposit, borrow
+   */
+  enum PoolStatus {INACTIVE, ACTIVE, CLOSED}
+  uint256 internal constant SECONDS_PER_YEAR = 365 days;
+  /**

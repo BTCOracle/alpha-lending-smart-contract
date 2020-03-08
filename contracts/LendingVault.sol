@@ -50,3 +50,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   enum PoolStatus {INACTIVE, ACTIVE, CLOSED}
   uint256 internal constant SECONDS_PER_YEAR = 365 days;
   /**
+   * @dev emitted on initilize pool
+   * @param pool the address of the ERC20 token of the pool
+   * @param alTokenAddress the address of the pool's alToken
+   * @param poolConfigAddress the address of the pool's configuration contract
+   */

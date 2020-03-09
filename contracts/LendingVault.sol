@@ -55,3 +55,9 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param alTokenAddress the address of the pool's alToken
    * @param poolConfigAddress the address of the pool's configuration contract
    */
+  event PoolInitialized(
+    address indexed pool,
+    address indexed alTokenAddress,
+    address indexed poolConfigAddress
+  );
+

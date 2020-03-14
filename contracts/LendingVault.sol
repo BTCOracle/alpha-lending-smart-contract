@@ -61,3 +61,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     address indexed poolConfigAddress
   );
 
+  /**
+   * @dev emitted on update pool configuration
+   * @param pool the address of the ERC20 token of the pool
+   * @param poolConfigAddress the address of the updated pool's configuration contract

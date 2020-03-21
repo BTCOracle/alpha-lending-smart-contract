@@ -65,3 +65,20 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @dev emitted on update pool configuration
    * @param pool the address of the ERC20 token of the pool
    * @param poolConfigAddress the address of the updated pool's configuration contract
+   */
+  event PoolConfigUpdated(address indexed pool, address poolConfigAddress);
+
+  /**
+   * @dev emitted on set price oracle
+   * @param priceOracleAddress the address of the price oracle
+   */
+  event PoolPriceOracleUpdated(address indexed priceOracleAddress);
+
+  /**
+   * @dev emitted on pool updates interest
+   * @param pool the address of the ERC20 token of the pool
+   * @param cumulativeBorrowInterest the borrow interest which accumulated from last update timestamp to now
+   * @param totalBorrows the updated total borrows of the pool. increasing by the cumulative borrow interest.
+   */
+  event PoolInterestUpdated(
+    address indexed pool,

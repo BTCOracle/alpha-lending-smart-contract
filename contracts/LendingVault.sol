@@ -82,3 +82,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    */
   event PoolInterestUpdated(
     address indexed pool,
+    uint256 cumulativeBorrowInterest,
+    uint256 totalBorrows
+  );
+

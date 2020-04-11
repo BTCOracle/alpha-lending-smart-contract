@@ -95,3 +95,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param depositAmount the amount of the ERC20 that deposit to the pool
    */
   event Deposit(
+    address indexed pool,
+    address indexed user,
+    uint256 depositShares,
+    uint256 depositAmount

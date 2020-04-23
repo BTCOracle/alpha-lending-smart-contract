@@ -99,3 +99,17 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     address indexed user,
     uint256 depositShares,
     uint256 depositAmount
+  );
+
+  /**
+   * @dev emitted on borrow
+   * @param pool the address of the ERC20 token of the pool
+   * @param user the address of the user who borrow the ERC20 token from the pool
+   * @param borrowShares the amount of borrow shares which calculated from borrow amount
+   * @param borrowAmount the amount of borrow
+   */
+  event Borrow(
+    address indexed pool,
+    address indexed user,
+    uint256 borrowShares,
+    uint256 borrowAmount

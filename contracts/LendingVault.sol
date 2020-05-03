@@ -113,3 +113,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     address indexed user,
     uint256 borrowShares,
     uint256 borrowAmount
+  );
+
+  /**
+   * @dev emitted on repay

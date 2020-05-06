@@ -117,3 +117,10 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
   /**
    * @dev emitted on repay
+   * @param pool the address of the ERC20 token of the pool
+   * @param user the address of the user who repay the ERC20 token to the pool
+   * @param repayShares the amount of repay shares which calculated from repay amount
+   * @param repayAmount the amount of repay
+   */
+  event Repay(address indexed pool, address indexed user, uint256 repayShares, uint256 repayAmount);
+

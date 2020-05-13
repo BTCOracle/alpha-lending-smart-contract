@@ -124,3 +124,10 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    */
   event Repay(address indexed pool, address indexed user, uint256 repayShares, uint256 repayAmount);
 
+  /**
+   * @dev emitted on withdraw alToken
+   * @param pool the address of the ERC20 token of the pool
+   * @param user the address of the user who withdraw the ERC20 token from the pool
+   * @param withdrawShares the amount of withdraw shares which calculated from withdraw amount
+   * @param withdrawAmount the amount of withdraw
+   */

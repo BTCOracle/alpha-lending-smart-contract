@@ -131,3 +131,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param withdrawShares the amount of withdraw shares which calculated from withdraw amount
    * @param withdrawAmount the amount of withdraw
    */
+  event Withdraw(
+    address indexed pool,
+    address indexed user,

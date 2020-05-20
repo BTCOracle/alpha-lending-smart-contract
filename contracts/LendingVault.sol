@@ -134,3 +134,12 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   event Withdraw(
     address indexed pool,
     address indexed user,
+    uint256 withdrawShares,
+    uint256 withdrawAmount
+  );
+
+  /**
+   * @dev emitted on liquidate
+   * @param user the address of the user who is liquidated by liquidator
+   * @param pool the address of the ERC20 token which is liquidated by liquidator
+   * @param collateral the address of the ERC20 token that liquidator received as a rewards

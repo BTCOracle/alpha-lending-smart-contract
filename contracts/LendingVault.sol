@@ -143,3 +143,23 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param user the address of the user who is liquidated by liquidator
    * @param pool the address of the ERC20 token which is liquidated by liquidator
    * @param collateral the address of the ERC20 token that liquidator received as a rewards
+   * @param liquidateAmount the amount of the ERC20 token that liquidator liquidate for the user
+   * @param liquidateShares the amount of liquidate shares which calculated from liquidate amount
+   * @param collateralAmount the amount of the collateral which calculated from liquidate amount that liquidator want to liquidate
+   * @param collateralShares the amount of collateral shares which liquidator received from liquidation in from of alToken
+   * @param liquidator the address of the liquidator
+   */
+  event Liquidate(
+    address indexed user,
+    address pool,
+    address collateral,
+    uint256 liquidateAmount,
+    uint256 liquidateShares,
+    uint256 collateralAmount,
+    uint256 collateralShares,
+    address liquidator
+  );
+
+  /**
+   * @dev emitted on reserve withdraw
+   * @param pool the address of the ERC20 token of the pool

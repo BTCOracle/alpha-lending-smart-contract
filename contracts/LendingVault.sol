@@ -163,3 +163,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   /**
    * @dev emitted on reserve withdraw
    * @param pool the address of the ERC20 token of the pool
+   * @param amount the amount to withdraw
+   * @param withdrawer the address of withdrawer
+   */
+  event ReserveWithdrawn(address indexed pool, uint256 amount, address withdrawer);
+

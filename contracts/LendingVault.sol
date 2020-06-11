@@ -168,3 +168,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    */
   event ReserveWithdrawn(address indexed pool, uint256 amount, address withdrawer);
 
+  /**
+   * @dev emitted on update reserve percent

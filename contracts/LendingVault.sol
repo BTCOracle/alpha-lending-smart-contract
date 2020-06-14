@@ -170,3 +170,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
   /**
    * @dev emitted on update reserve percent
+   * @param previousReservePercent the previous pool's reserve percent
+   * @param newReservePercent the updated pool's reserve percent
+   */

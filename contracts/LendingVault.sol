@@ -173,3 +173,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param previousReservePercent the previous pool's reserve percent
    * @param newReservePercent the updated pool's reserve percent
    */
+  event ReservePercentUpdated(uint256 previousReservePercent, uint256 newReservePercent);
+
+  /**
+   * @dev the struct for storing the user's state separately on each pool
+   */

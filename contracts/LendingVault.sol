@@ -178,3 +178,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   /**
    * @dev the struct for storing the user's state separately on each pool
    */
+  struct UserPoolData {
+    // the user set to used this pool as collateral for borrowing

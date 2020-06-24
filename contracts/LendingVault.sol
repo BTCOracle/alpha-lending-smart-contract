@@ -180,3 +180,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    */
   struct UserPoolData {
     // the user set to used this pool as collateral for borrowing
+    bool disableUseAsCollateral;
+    // borrow shares of the user of this pool. If user didn't borrow this pool then shere will be 0
+    uint256 borrowShares;
+    // latest alpha multiplier (borrow reward multiplier) of the user of this pool. Using to calculate current borrow reward.

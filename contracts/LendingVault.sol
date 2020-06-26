@@ -184,3 +184,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     // borrow shares of the user of this pool. If user didn't borrow this pool then shere will be 0
     uint256 borrowShares;
     // latest alpha multiplier (borrow reward multiplier) of the user of this pool. Using to calculate current borrow reward.
+    uint256 latestAlphaMultiplier;
+  }

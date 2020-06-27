@@ -186,3 +186,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     // latest alpha multiplier (borrow reward multiplier) of the user of this pool. Using to calculate current borrow reward.
     uint256 latestAlphaMultiplier;
   }
+
+  /**
+   * @dev the struct for storing the pool's state separately on each ERC20 token

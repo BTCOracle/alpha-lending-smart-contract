@@ -189,3 +189,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
   /**
    * @dev the struct for storing the pool's state separately on each ERC20 token
+   */
+  struct Pool {
+    // pool status
+    PoolStatus status;

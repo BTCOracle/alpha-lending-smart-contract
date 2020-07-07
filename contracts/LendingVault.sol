@@ -193,3 +193,9 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   struct Pool {
     // pool status
     PoolStatus status;
+    // al token of the pool
+    AlToken alToken;
+    // pool configuration contract
+    IPoolConfiguration poolConfig;
+    // total borrow amount on this pool
+    uint256 totalBorrows;

@@ -199,3 +199,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     IPoolConfiguration poolConfig;
     // total borrow amount on this pool
     uint256 totalBorrows;
+    // total share on this pool
+    uint256 totalBorrowShares;
+    // reserve amount on this pool
+    uint256 poolReserves;
+    // last update timestamp of this pool

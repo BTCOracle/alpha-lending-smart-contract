@@ -204,3 +204,14 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     // reserve amount on this pool
     uint256 poolReserves;
     // last update timestamp of this pool
+    uint256 lastUpdateTimestamp;
+    // total alpha token reward on this pool
+    uint256 totalAlphaTokenReward;
+    // alpha reward multiplier of each borrow share
+    uint256 alphaMultiplier;
+  }
+
+  /**
+   * @dev the mapping from the ERC20 token to the pool struct of that ERC20 token
+   * token address => pool
+   */

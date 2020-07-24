@@ -215,3 +215,4 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @dev the mapping from the ERC20 token to the pool struct of that ERC20 token
    * token address => pool
    */
+  mapping(address => Pool) public pools;

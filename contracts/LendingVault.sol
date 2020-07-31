@@ -219,3 +219,4 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
   /**
    * @dev the mapping from user address to the ERC20 token to the user data of
+   * that ERC20 token's pool

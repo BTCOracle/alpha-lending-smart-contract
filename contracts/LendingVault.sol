@@ -224,3 +224,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    */
   mapping(address => mapping(address => UserPoolData)) public userPoolData;
 
+  /**
+   * @dev list of all tokens on the lending pool contract.
+   */

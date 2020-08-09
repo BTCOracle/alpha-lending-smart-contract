@@ -227,3 +227,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   /**
    * @dev list of all tokens on the lending pool contract.
    */
+  ERC20[] public tokenList;
+
+  /**
+   * @dev price oracle of the lending pool contract.
+   */

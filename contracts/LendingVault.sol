@@ -232,3 +232,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   /**
    * @dev price oracle of the lending pool contract.
    */
+  IPriceOracle priceOracle;
+

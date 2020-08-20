@@ -234,3 +234,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    */
   IPriceOracle priceOracle;
 
+  /**
+   * @dev alpha token address contract.

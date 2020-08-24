@@ -236,3 +236,13 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
   /**
    * @dev alpha token address contract.
+   */
+  IAlphaDistributor public override distributor;
+
+  /**
+   * @dev AltokenDeployer address
+   */
+  AlTokenDeployer public alTokenDeployer;
+  /**
+   * @dev VestingAlpha address
+   */

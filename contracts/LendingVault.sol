@@ -246,3 +246,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   /**
    * @dev VestingAlpha address
    */
+  IVestingAlpha public override vestingAlpha;
+  // max purchase percent of each liquidation
+  // max purchase shares is 50% of user borrow shares

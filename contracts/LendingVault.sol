@@ -249,3 +249,17 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   IVestingAlpha public override vestingAlpha;
   // max purchase percent of each liquidation
   // max purchase shares is 50% of user borrow shares
+  uint256 public constant CLOSE_FACTOR = 0.5 * 1e18;
+  uint256 public constant EQUILIBRIUM = 0.5 * 1e18;
+  uint256 public constant MAX_UTILIZATION_RATE = 1 * 1e18;
+  uint256 public reservePercent = 0.05 * 1e18;
+
+  constructor(AlTokenDeployer _alTokenDeployer) public {
+    alTokenDeployer = _alTokenDeployer;
+  }
+
+  /**
+   * @dev update accumulated pool's borrow interest from last update timestamp to now then add to total borrows of that pool.
+   * any function that use this modifier will update pool's total borrows before starting the function.
+   * @param  _token the ERC20 token of the pool that will update accumulated borrow interest to total borrows
+   */

@@ -263,3 +263,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * any function that use this modifier will update pool's total borrows before starting the function.
    * @param  _token the ERC20 token of the pool that will update accumulated borrow interest to total borrows
    */
+  modifier updatePoolWithInterestsAndTimestamp(ERC20 _token) {
+    Pool storage pool = pools[address(_token)];
+    uint256 borrowInterestRate = pool.poolConfig.calculateInterestRate(

@@ -266,3 +266,17 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   modifier updatePoolWithInterestsAndTimestamp(ERC20 _token) {
     Pool storage pool = pools[address(_token)];
     uint256 borrowInterestRate = pool.poolConfig.calculateInterestRate(
+      pool.totalBorrows,
+      getTotalLiquidity(_token)
+    );
+    uint256 cumulativeBorrowInterest = calculateLinearInterest(
+      borrowInterestRate,
+      pool.lastUpdateTimestamp,
+      block.timestamp
+    );
+
+    // update pool
+    uint256 previousTotalBorrows = pool.totalBorrows;
+    pool.totalBorrows = cumulativeBorrowInterest.wadMul(pool.totalBorrows);
+    pool.poolReserves = pool.poolReserves.add(
+      pool.totalBorrows.sub(previousTotalBorrows).wadMul(reservePercent)

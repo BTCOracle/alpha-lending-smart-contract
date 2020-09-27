@@ -280,3 +280,11 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     pool.totalBorrows = cumulativeBorrowInterest.wadMul(pool.totalBorrows);
     pool.poolReserves = pool.poolReserves.add(
       pool.totalBorrows.sub(previousTotalBorrows).wadMul(reservePercent)
+    );
+    pool.lastUpdateTimestamp = block.timestamp;
+    emit PoolInterestUpdated(address(_token), cumulativeBorrowInterest, pool.totalBorrows);
+    _;
+  }
+
+  /**
+   * @dev update Alpha reward by call poke on distribution contract.

@@ -288,3 +288,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
   /**
    * @dev update Alpha reward by call poke on distribution contract.
+   */
+  modifier updateAlphaReward() {
+    if (address(distributor) != address(0)) {
+      distributor.poke();

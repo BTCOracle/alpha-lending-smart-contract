@@ -292,3 +292,9 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   modifier updateAlphaReward() {
     if (address(distributor) != address(0)) {
       distributor.poke();
+    }
+    _;
+  }
+
+  /**
+   * @dev initialize the ERC20 token pool. only owner can initialize the pool.

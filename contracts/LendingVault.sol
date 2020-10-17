@@ -298,3 +298,15 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
   /**
    * @dev initialize the ERC20 token pool. only owner can initialize the pool.
+   * @param _token the ERC20 token of the pool
+   * @param _poolConfig the configuration contract of the pool
+   */
+  function initPool(ERC20 _token, IPoolConfiguration _poolConfig) external onlyOwner {
+    for (uint256 i = 0; i < tokenList.length; i++) {
+      require(tokenList[i] != _token, "this pool already exists on lending pool");
+    }
+    string memory alTokenSymbol = string(abi.encodePacked("al", _token.symbol()));
+    string memory alTokenName = string(abi.encodePacked("Al", _token.symbol()));
+    AlToken alToken = alTokenDeployer.createNewAlToken(alTokenName, alTokenSymbol, _token);
+    Pool memory pool = Pool(
+      PoolStatus.INACTIVE,

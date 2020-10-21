@@ -310,3 +310,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     AlToken alToken = alTokenDeployer.createNewAlToken(alTokenName, alTokenSymbol, _token);
     Pool memory pool = Pool(
       PoolStatus.INACTIVE,
+      alToken,
+      _poolConfig,
+      0,
+      0,
+      0,

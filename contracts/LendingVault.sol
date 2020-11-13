@@ -317,3 +317,24 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       0,
       block.timestamp,
       0,
+      0
+    );
+    pools[address(_token)] = pool;
+    tokenList.push(_token);
+    emit PoolInitialized(address(_token), address(alToken), address(_poolConfig));
+  }
+
+  /**
+   * @dev set pool configuration contract of the pool. only owner can set the pool configuration.
+   * @param _token the ERC20 token of the pool that will set the configuration
+   * @param _poolConfig the interface of the pool's configuration contract
+   */
+  function setPoolConfig(ERC20 _token, IPoolConfiguration _poolConfig) external onlyOwner {
+    Pool storage pool = pools[address(_token)];
+    require(
+      address(pool.alToken) != address(0),
+      "pool isn't initialized, can't set the pool config"
+    );
+    pool.poolConfig = _poolConfig;
+    emit PoolConfigUpdated(address(_token), address(_poolConfig));
+  }

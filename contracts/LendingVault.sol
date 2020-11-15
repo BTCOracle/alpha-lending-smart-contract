@@ -338,3 +338,9 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     pool.poolConfig = _poolConfig;
     emit PoolConfigUpdated(address(_token), address(_poolConfig));
   }
+
+  /**
+   * @dev set the status of the lending pool. only owner can set the pool's status
+   * @param _token the ERC20 token of the pool
+   * @param _status the status of the pool
+   */

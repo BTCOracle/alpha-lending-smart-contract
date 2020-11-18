@@ -344,3 +344,4 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param _token the ERC20 token of the pool
    * @param _status the status of the pool
    */
+  function setPoolStatus(ERC20 _token, PoolStatus _status) external onlyOwner {

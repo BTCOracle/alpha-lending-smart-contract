@@ -345,3 +345,18 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param _status the status of the pool
    */
   function setPoolStatus(ERC20 _token, PoolStatus _status) external onlyOwner {
+    Pool storage pool = pools[address(_token)];
+    pool.status = _status;
+  }
+
+  /**
+   * @dev set user uses the ERC20 token as collateral flag
+   * @param _token the ERC20 token of the pool
+   * @param _useAsCollateral the boolean that represent user use the ERC20 token on the pool as collateral or not
+   */
+  function setUserUseAsCollateral(ERC20 _token, bool _useAsCollateral) external {
+    UserPoolData storage userData = userPoolData[msg.sender][address(_token)];
+    userData.disableUseAsCollateral = !_useAsCollateral;
+    // only disable as collateral need to check the account health
+    if (!_useAsCollateral) {
+      require(isAccountHealthy(msg.sender), "can't set use as collateral, account isn't healthy.");

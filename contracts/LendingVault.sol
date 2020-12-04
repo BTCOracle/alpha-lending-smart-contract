@@ -360,3 +360,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     // only disable as collateral need to check the account health
     if (!_useAsCollateral) {
       require(isAccountHealthy(msg.sender), "can't set use as collateral, account isn't healthy.");
+    }
+  }
+

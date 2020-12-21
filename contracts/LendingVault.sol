@@ -363,3 +363,21 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     }
   }
 
+  /**
+   * @dev set price oracle of the lending pool. only owner can set the price oracle.
+   * @param _oracle the price oracle which will get asset price to the lending pool contract
+   */
+  function setPriceOracle(IPriceOracle _oracle) external onlyOwner {
+    priceOracle = _oracle;
+    emit PoolPriceOracleUpdated(address(_oracle));
+  }
+
+  /**
+   * @dev get the pool of the ERC20 token
+   * @param _token the ERC20 token of the pool
+   * @return status - the pool's status, alTokenAddress - the pool's alToken, poolConfigAddress - the pool's configuration contract,
+   * totalBorrows - the pool's total borrows, totalBorrowShares - the pool's total borrow shares, totalLiquidity - the pool's total liquidity,
+   * totalAvailableLiquidity - the pool's total available liquidity, lastUpdateTimestamp - the pool's last update timestamp
+   */
+  function getPool(ERC20 _token)
+    external

@@ -381,3 +381,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    */
   function getPool(ERC20 _token)
     external
+    view
+    returns (

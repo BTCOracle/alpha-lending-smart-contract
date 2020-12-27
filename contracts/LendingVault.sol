@@ -383,3 +383,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     external
     view
     returns (
+      PoolStatus status,
+      address alTokenAddress,
+      address poolConfigAddress,
+      uint256 totalBorrows,

@@ -387,3 +387,4 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       address alTokenAddress,
       address poolConfigAddress,
       uint256 totalBorrows,
+      uint256 totalBorrowShares,

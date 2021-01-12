@@ -388,3 +388,16 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       address poolConfigAddress,
       uint256 totalBorrows,
       uint256 totalBorrowShares,
+      uint256 totalLiquidity,
+      uint256 totalAvailableLiquidity,
+      uint256 lastUpdateTimestamp
+    )
+  {
+    Pool storage pool = pools[address(_token)];
+    alTokenAddress = address(pool.alToken);
+    poolConfigAddress = address(pool.poolConfig);
+    totalBorrows = pool.totalBorrows;
+    totalBorrowShares = pool.totalBorrowShares;
+    totalLiquidity = getTotalLiquidity(_token);
+    totalAvailableLiquidity = getTotalAvailableLiquidity(_token);
+    lastUpdateTimestamp = pool.lastUpdateTimestamp;

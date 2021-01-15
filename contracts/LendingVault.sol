@@ -401,3 +401,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     totalLiquidity = getTotalLiquidity(_token);
     totalAvailableLiquidity = getTotalAvailableLiquidity(_token);
     lastUpdateTimestamp = pool.lastUpdateTimestamp;
+    status = pool.status;
+  }
+
+  /**

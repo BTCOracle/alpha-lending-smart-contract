@@ -419,3 +419,20 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     returns (
       uint256 compoundedLiquidityBalance,
       uint256 compoundedBorrowBalance,
+      bool userUsePoolAsCollateral
+    )
+  {
+    compoundedLiquidityBalance = getUserCompoundedLiquidityBalance(_user, _token);
+    compoundedBorrowBalance = getUserCompoundedBorrowBalance(_user, _token);
+    userUsePoolAsCollateral = !userPoolData[_user][address(_token)].disableUseAsCollateral;
+  }
+
+  /**
+   * @dev calculate the interest rate which is the part of the annual interest rate on the elapsed time
+   * @param _rate an annual interest rate express in WAD
+   * @param _fromTimestamp the start timestamp to calculate interest
+   * @param _toTimestamp the end timestamp to calculate interest
+   * @return the interest rate in between the start timestamp to the end timestamp
+   */
+  function calculateLinearInterest(
+    uint256 _rate,

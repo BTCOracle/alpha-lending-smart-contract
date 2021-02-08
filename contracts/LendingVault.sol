@@ -436,3 +436,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    */
   function calculateLinearInterest(
     uint256 _rate,
+    uint256 _fromTimestamp,
+    uint256 _toTimestamp

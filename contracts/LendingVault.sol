@@ -438,3 +438,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     uint256 _rate,
     uint256 _fromTimestamp,
     uint256 _toTimestamp
+  ) internal pure returns (uint256) {
+    return
+      _rate.wadMul(_toTimestamp.sub(_fromTimestamp)).wadDiv(SECONDS_PER_YEAR).add(WadMath.wad());
+  }
+

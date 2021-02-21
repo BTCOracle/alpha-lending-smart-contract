@@ -443,3 +443,13 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       _rate.wadMul(_toTimestamp.sub(_fromTimestamp)).wadDiv(SECONDS_PER_YEAR).add(WadMath.wad());
   }
 
+  /**
+   * @dev get user's compounded borrow balance of the user in the ERC20 token pool
+   * @param _user the address of the user
+   * @param _token the ERC20 token of the pool that will get the compounded borrow balance
+   * @return the compounded borrow balance of the user on the ERC20 token pool
+   */
+  function getUserCompoundedBorrowBalance(address _user, ERC20 _token)
+    public
+    view
+    returns (uint256)

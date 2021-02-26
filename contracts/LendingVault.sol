@@ -453,3 +453,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     public
     view
     returns (uint256)
+  {
+    uint256 userBorrowShares = userPoolData[_user][address(_token)].borrowShares;

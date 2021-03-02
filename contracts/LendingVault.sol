@@ -455,3 +455,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     returns (uint256)
   {
     uint256 userBorrowShares = userPoolData[_user][address(_token)].borrowShares;
+    return calculateRoundUpBorrowAmount(_token, userBorrowShares);
+  }
+

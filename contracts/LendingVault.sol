@@ -461,3 +461,11 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   /**
    * @dev get user's compounded liquidity balance of the user in the ERC20 token pool
    * @param _user the account address of the user
+   * @param _token the ERC20 token of the pool that will get the compounded liquidity balance
+   * @return the compounded liquidity balance of the user on the ERC20 token pool
+   */
+  function getUserCompoundedLiquidityBalance(address _user, ERC20 _token)
+    public
+    view
+    returns (uint256)
+  {

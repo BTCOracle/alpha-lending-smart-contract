@@ -469,3 +469,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     view
     returns (uint256)
   {
+    Pool storage pool = pools[address(_token)];
+    uint256 userLiquidityShares = pool.alToken.balanceOf(_user);
+    return calculateRoundDownLiquidityAmount(_token, userLiquidityShares);
+  }

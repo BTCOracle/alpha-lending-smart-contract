@@ -473,3 +473,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     uint256 userLiquidityShares = pool.alToken.balanceOf(_user);
     return calculateRoundDownLiquidityAmount(_token, userLiquidityShares);
   }
+
+  /**
+   * @dev get total available liquidity in the ERC20 token pool

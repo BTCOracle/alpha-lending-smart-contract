@@ -476,3 +476,21 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
   /**
    * @dev get total available liquidity in the ERC20 token pool
+   * @param _token the ERC20 token of the pool
+   * @return the balance of the ERC20 token in the pool
+   */
+  function getTotalAvailableLiquidity(ERC20 _token) public view returns (uint256) {
+    return _token.balanceOf(address(this));
+  }
+
+  /**
+   * @dev get total liquidity of the ERC20 token pool
+   * @param _token the ERC20 token of the pool
+   * @return the total liquidity on the lending pool which is the sum of total borrows and available liquidity
+   */
+  function getTotalLiquidity(ERC20 _token) public view returns (uint256) {
+    Pool storage pool = pools[address(_token)];
+    return
+      pool.totalBorrows.add(getTotalAvailableLiquidity(_token)).sub(
+        pools[address(_token)].poolReserves
+      );

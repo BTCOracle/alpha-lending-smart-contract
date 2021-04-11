@@ -494,3 +494,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       pool.totalBorrows.add(getTotalAvailableLiquidity(_token)).sub(
         pools[address(_token)].poolReserves
       );
+  }
+
+  /**
+   * @dev calculate liquidity share amount (round-down)
+   * @param _token the ERC20 token of the pool

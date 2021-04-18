@@ -499,3 +499,10 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   /**
    * @dev calculate liquidity share amount (round-down)
    * @param _token the ERC20 token of the pool
+   * @param _amount the amount of liquidity to calculate the liquidity shares
+   * @return the amount of liquidity shares which is calculated from the below formula
+   * liquidity shares = (_amount * total liquidity shares) / total liquidity
+   * if the calculated liquidity shares = 2.9 then liquidity shares will be 2
+   */
+  function calculateRoundDownLiquidityShareAmount(ERC20 _token, uint256 _amount)
+    internal

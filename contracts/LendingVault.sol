@@ -506,3 +506,29 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    */
   function calculateRoundDownLiquidityShareAmount(ERC20 _token, uint256 _amount)
     internal
+    view
+    returns (uint256)
+  {
+    Pool storage pool = pools[address(_token)];
+    uint256 totalLiquidity = getTotalLiquidity(_token);
+    uint256 totalLiquidityShares = pool.alToken.totalSupply();
+    if (totalLiquidity == 0 && totalLiquidityShares == 0) {
+      return _amount;
+    }
+    return _amount.mul(totalLiquidityShares).div(totalLiquidity);
+  }
+
+  /**
+   * @dev calculate borrow share amount (round-up)
+   * @param _token the ERC20 token of the pool
+   * @param _amount the amount of borrow to calculate the borrow shares
+   * @return the borrow amount which is calculated from the below formula
+   * borrow shares = ((amount * total borrow shares) + (total borrows -  1)) / total borrow
+   * if the calculated borrow shares = 10.1 then the borrow shares = 11
+   */
+  function calculateRoundUpBorrowShareAmount(ERC20 _token, uint256 _amount)
+    internal
+    view
+    returns (uint256)
+  {
+    Pool storage pool = pools[address(_token)];

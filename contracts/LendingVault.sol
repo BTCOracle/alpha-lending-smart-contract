@@ -532,3 +532,4 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     returns (uint256)
   {
     Pool storage pool = pools[address(_token)];
+    // borrow share amount of the first borrowing is equal to amount

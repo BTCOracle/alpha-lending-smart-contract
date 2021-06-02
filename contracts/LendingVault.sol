@@ -550,3 +550,4 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   function calculateRoundDownBorrowShareAmount(ERC20 _token, uint256 _amount)
     internal
     view
+    returns (uint256)

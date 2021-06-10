@@ -551,3 +551,12 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     internal
     view
     returns (uint256)
+  {
+    Pool storage pool = pools[address(_token)];
+    if (pool.totalBorrowShares == 0) {
+      return 0;
+    }
+    return _amount.mul(pool.totalBorrowShares).div(pool.totalBorrows);
+  }
+
+  /**

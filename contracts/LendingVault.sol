@@ -560,3 +560,17 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   }
 
   /**
+   * @dev calculate liquidity share amount (round-up)
+   * @param _token the ERC20 token of the pool
+   * @param _amount the amount of liquidity to calculate the liquidity shares
+   * @return the liquidity shares which is calculated from the below formula
+   * liquidity shares = ((amount * total liquidity shares) + (total liquidity - 1)) / total liquidity shares
+   * if the calculated liquidity shares = 10.1 then the liquidity shares = 11
+   */
+  function calculateRoundUpLiquidityShareAmount(ERC20 _token, uint256 _amount)
+    internal
+    view
+    returns (uint256)
+  {
+    Pool storage pool = pools[address(_token)];
+    uint256 poolTotalLiquidityShares = pool.alToken.totalSupply();

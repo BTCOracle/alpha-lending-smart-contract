@@ -574,3 +574,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   {
     Pool storage pool = pools[address(_token)];
     uint256 poolTotalLiquidityShares = pool.alToken.totalSupply();
+    uint256 poolTotalLiquidity = getTotalLiquidity(_token);
+    // liquidity share amount of the first depositing is equal to amount

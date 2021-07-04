@@ -576,3 +576,12 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     uint256 poolTotalLiquidityShares = pool.alToken.totalSupply();
     uint256 poolTotalLiquidity = getTotalLiquidity(_token);
     // liquidity share amount of the first depositing is equal to amount
+    if (poolTotalLiquidity == 0 || poolTotalLiquidityShares == 0) {
+      return _amount;
+    }
+    return _amount.mul(poolTotalLiquidityShares).divCeil(poolTotalLiquidity);
+  }
+
+  /**
+   * @dev calculate liquidity amount (round-down)
+   * @param _token the ERC20 token of the pool

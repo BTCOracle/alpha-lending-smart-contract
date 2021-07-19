@@ -603,3 +603,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     return _shareAmount.mul(getTotalLiquidity(_token)).div(poolTotalLiquidityShares);
   }
 
+  /**
+   * @dev calculate borrow amount (round-up)
+   * @param _token the ERC20 token of the pool
+   * @param _shareAmount the borrow shares to calculate the amount of borrow

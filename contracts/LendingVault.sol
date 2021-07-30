@@ -609,3 +609,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param _shareAmount the borrow shares to calculate the amount of borrow
    * @return the amount of borrowing which is calculated from the below formula
    * borrowing amount = ((share amount * total borrows) + (total borrow shares - 1)) / total borrow shares
+   * if the calculated borrowing amount = 10.1 then the borrowing amount = 11
+   */
+  function calculateRoundUpBorrowAmount(ERC20 _token, uint256 _shareAmount)
+    internal
+    view

@@ -614,3 +614,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   function calculateRoundUpBorrowAmount(ERC20 _token, uint256 _shareAmount)
     internal
     view
+    returns (uint256)
+  {
+    Pool storage pool = pools[address(_token)];

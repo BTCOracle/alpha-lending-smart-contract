@@ -622,3 +622,17 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     }
     return _shareAmount.mul(pool.totalBorrows).divCeil(pool.totalBorrowShares);
   }
+
+  /**
+   * @dev check is the user account is still healthy
+   * Traverse a token list to visit all ERC20 token pools then accumulate 3 balance values of the user:
+   * -----------------------------
+   * 1. user's total liquidity balance. Accumulate the user's liquidity balance of all ERC20 token pools
+   * 2. user's total borrow balance. Accumulate the user's borrow balance of all ERC20 token pools
+   * 3. user's total collateral balance. each ERC20 token has the different max loan-to-value (collateral percent) or the percent of
+   * liquidity that can actually use as collateral for the borrowing.
+   * e.g. if B token has 75% collateral percent means the collateral balance is 75 if the user's has 100 B token balance
+   * -----------------------------
+   * the account is still healthy if total borrow value is less than total collateral value. This means the user's collateral
+   * still cover the user's loan. In case of total borrow value is more than total collateral value then user's account is not healthy.
+   * @param _user the address of the user that will check the account health status

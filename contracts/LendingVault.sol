@@ -636,3 +636,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * the account is still healthy if total borrow value is less than total collateral value. This means the user's collateral
    * still cover the user's loan. In case of total borrow value is more than total collateral value then user's account is not healthy.
    * @param _user the address of the user that will check the account health status
+   * @return the boolean that represent the account health status. Returns true if account is still healthy, false if account is not healthy.
+   */

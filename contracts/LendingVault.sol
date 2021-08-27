@@ -638,3 +638,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param _user the address of the user that will check the account health status
    * @return the boolean that represent the account health status. Returns true if account is still healthy, false if account is not healthy.
    */
+  function isAccountHealthy(address _user) public override view returns (bool) {
+    (, uint256 totalCollateralBalanceBase, uint256 totalBorrowBalanceBase) = getUserAccount(_user);
+
+    return totalBorrowBalanceBase <= totalCollateralBalanceBase;

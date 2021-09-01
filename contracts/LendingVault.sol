@@ -642,3 +642,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     (, uint256 totalCollateralBalanceBase, uint256 totalBorrowBalanceBase) = getUserAccount(_user);
 
     return totalBorrowBalanceBase <= totalCollateralBalanceBase;
+  }
+
+  /**

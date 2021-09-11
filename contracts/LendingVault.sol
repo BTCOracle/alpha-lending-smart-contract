@@ -645,3 +645,16 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   }
 
   /**
+   * @dev get user account details
+   * @param _user the address of the user to get the account details
+   * return totalLiquidityBalanceBase - the value of user's total liquidity,
+   * totalCollateralBalanceBase - the value of user's total collateral,
+   * totalBorrowBalanceBase - the value of user's total borrow
+   */
+  function getUserAccount(address _user)
+    public
+    view
+    returns (
+      uint256 totalLiquidityBalanceBase,
+      uint256 totalCollateralBalanceBase,
+      uint256 totalBorrowBalanceBase

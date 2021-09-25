@@ -658,3 +658,18 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       uint256 totalLiquidityBalanceBase,
       uint256 totalCollateralBalanceBase,
       uint256 totalBorrowBalanceBase
+    )
+  {
+    for (uint256 i = 0; i < tokenList.length; i++) {
+      ERC20 _token = tokenList[i];
+      Pool storage pool = pools[address(_token)];
+
+      // get user pool data
+      (
+        uint256 compoundedLiquidityBalance,
+        uint256 compoundedBorrowBalance,
+        bool userUsePoolAsCollateral
+      ) = getUserPoolData(_user, _token);
+
+      if (compoundedLiquidityBalance != 0 || compoundedBorrowBalance != 0) {
+        uint256 collateralPercent = pool.poolConfig.getCollateralPercent();

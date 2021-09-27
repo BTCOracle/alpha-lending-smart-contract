@@ -673,3 +673,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
       if (compoundedLiquidityBalance != 0 || compoundedBorrowBalance != 0) {
         uint256 collateralPercent = pool.poolConfig.getCollateralPercent();
+        uint256 poolPricePerUnit = priceOracle.getAssetPrice(address(_token));
+        require(poolPricePerUnit > 0, "token price isn't correct");
+
+        uint256 liquidityBalanceBase = poolPricePerUnit.wadMul(compoundedLiquidityBalance);

@@ -677,3 +677,11 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
         require(poolPricePerUnit > 0, "token price isn't correct");
 
         uint256 liquidityBalanceBase = poolPricePerUnit.wadMul(compoundedLiquidityBalance);
+        totalLiquidityBalanceBase = totalLiquidityBalanceBase.add(liquidityBalanceBase);
+        // this pool can use as collateral when collateralPercent more than 0.
+        if (collateralPercent > 0 && userUsePoolAsCollateral) {
+          totalCollateralBalanceBase = totalCollateralBalanceBase.add(
+            liquidityBalanceBase.wadMul(collateralPercent)
+          );
+        }
+        totalBorrowBalanceBase = totalBorrowBalanceBase.add(

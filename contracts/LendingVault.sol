@@ -685,3 +685,14 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
           );
         }
         totalBorrowBalanceBase = totalBorrowBalanceBase.add(
+          poolPricePerUnit.wadMul(compoundedBorrowBalance)
+        );
+      }
+    }
+  }
+
+  function totalBorrowInUSD(ERC20 _token) public view returns (uint256) {
+    require(address(priceOracle) != address(0), "price oracle isn't initialized");
+    uint256 tokenPricePerUnit = priceOracle.getAssetPrice(address(_token));
+    require(tokenPricePerUnit > 0, "token price isn't correct");
+    return tokenPricePerUnit.mul(pools[address(_token)].totalBorrows);

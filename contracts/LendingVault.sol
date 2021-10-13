@@ -696,3 +696,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     uint256 tokenPricePerUnit = priceOracle.getAssetPrice(address(_token));
     require(tokenPricePerUnit > 0, "token price isn't correct");
     return tokenPricePerUnit.mul(pools[address(_token)].totalBorrows);
+  }
+
+  /**
+   * @dev deposit the ERC20 token to the pool
+   * @param _token the ERC20 token of the pool that user want to deposit

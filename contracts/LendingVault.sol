@@ -701,3 +701,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   /**
    * @dev deposit the ERC20 token to the pool
    * @param _token the ERC20 token of the pool that user want to deposit
+   * @param _amount the deposit amount
+   * User can call this function to deposit their ERC20 token to the pool. user will receive the alToken of that ERC20 token
+   * which represent the liquidity shares of the user. Providing the liquidity will receive an interest from the the borrower as an incentive.
+   * e.g. Alice deposits 10 Hello tokens to the pool.
+   * if 1 Hello token shares equals to 2 Hello tokens then Alice will have 5 Hello token shares from 10 Hello tokens depositing.

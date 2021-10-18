@@ -706,3 +706,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * which represent the liquidity shares of the user. Providing the liquidity will receive an interest from the the borrower as an incentive.
    * e.g. Alice deposits 10 Hello tokens to the pool.
    * if 1 Hello token shares equals to 2 Hello tokens then Alice will have 5 Hello token shares from 10 Hello tokens depositing.
+   * User will receive the liquidity shares in the form of alToken so Alice will have 5 alHello on her wallet
+   * for representing her shares.
+   */

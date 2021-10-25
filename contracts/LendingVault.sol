@@ -709,3 +709,12 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * User will receive the liquidity shares in the form of alToken so Alice will have 5 alHello on her wallet
    * for representing her shares.
    */
+  function deposit(ERC20 _token, uint256 _amount)
+    external
+    nonReentrant
+    updatePoolWithInterestsAndTimestamp(_token)
+    updateAlphaReward
+  {
+    Pool storage pool = pools[address(_token)];
+    require(pool.status == PoolStatus.ACTIVE, "can't deposit to this pool");
+    require(_amount > 0, "deposit amount should more than 0");

@@ -725,3 +725,10 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     // 2. mint alToken to user equal to liquidity share amount
     pool.alToken.mint(msg.sender, shareAmount);
 
+    // 3. transfer user deposit liquidity to the pool
+    _token.safeTransferFrom(msg.sender, address(this), _amount);
+
+    emit Deposit(address(_token), msg.sender, shareAmount, _amount);
+  }
+
+  /**

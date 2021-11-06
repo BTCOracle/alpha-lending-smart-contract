@@ -732,3 +732,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   }
 
   /**
+   * @dev borrow the ERC20 token from the pool
+   * @param _token the ERC20 token of the pool that user want to borrow
+   * @param _amount the borrow amount
+   * User can call this function to borrow the ERC20 token from the pool. This function will

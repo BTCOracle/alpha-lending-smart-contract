@@ -736,3 +736,20 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param _token the ERC20 token of the pool that user want to borrow
    * @param _amount the borrow amount
    * User can call this function to borrow the ERC20 token from the pool. This function will
+   * convert the borrow amount to the borrow shares then accumulate borrow shares of this user
+   * of this ERC20 pool then set to user data on that pool state.
+   * e.g. Bob borrows 10 Hello tokens from the Hello token pool.
+   * if 1 borrow shares of Hello token equals to 5 Hello tokens then the lending contract will
+   * set Bob's borrow shares state with 2 borrow shares. Bob will receive 10 Hello tokens.
+   */
+  function borrow(ERC20 _token, uint256 _amount)
+    external
+    nonReentrant
+    updatePoolWithInterestsAndTimestamp(_token)
+    updateAlphaReward
+  {
+    Pool storage pool = pools[address(_token)];
+    UserPoolData storage userData = userPoolData[msg.sender][address(_token)];
+    require(pool.status == PoolStatus.ACTIVE, "can't borrow this pool");
+    require(_amount > 0, "borrow amount should more than 0");
+    require(

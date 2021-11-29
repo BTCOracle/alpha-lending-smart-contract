@@ -753,3 +753,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     require(pool.status == PoolStatus.ACTIVE, "can't borrow this pool");
     require(_amount > 0, "borrow amount should more than 0");
     require(
+      _amount <= getTotalAvailableLiquidity(_token),
+      "amount is more than available liquidity on pool"
+    );
+

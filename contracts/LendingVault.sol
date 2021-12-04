@@ -757,3 +757,4 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       "amount is more than available liquidity on pool"
     );
 
+    // 0. Claim alpha token from latest borrow

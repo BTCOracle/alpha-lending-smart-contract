@@ -758,3 +758,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     );
 
     // 0. Claim alpha token from latest borrow
+    claimCurrentAlphaReward(_token, msg.sender);
+
+    // 1. calculate borrow share amount
+    uint256 borrowShare = calculateRoundUpBorrowShareAmount(_token, _amount);
+

@@ -763,3 +763,4 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     // 1. calculate borrow share amount
     uint256 borrowShare = calculateRoundUpBorrowShareAmount(_token, _amount);
 
+    // 2. update pool state

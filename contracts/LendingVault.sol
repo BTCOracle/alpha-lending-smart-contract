@@ -768,3 +768,13 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     pool.totalBorrowShares = pool.totalBorrowShares.add(borrowShare);
 
     // 3. update user state
+    userData.borrowShares = userData.borrowShares.add(borrowShare);
+
+    // 4. transfer borrowed token from pool to user
+    _token.safeTransfer(msg.sender, _amount);
+
+    // 5. check account health. this transaction will revert if the account of this user is not healthy
+    require(isAccountHealthy(msg.sender), "account is not healthy. can't borrow");
+    emit Borrow(address(_token), msg.sender, borrowShare, _amount);
+  }
+

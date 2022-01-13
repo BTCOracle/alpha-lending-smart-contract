@@ -778,3 +778,12 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     emit Borrow(address(_token), msg.sender, borrowShare, _amount);
   }
 
+  /**
+   * @dev repay the ERC20 token to the pool equal to repay amount
+   * @param _token the ERC20 token of the pool that user want to repay
+   * @param _amount the repay amount
+   * User can call this function to repay the ERC20 token to the pool. For user's convenience,
+   * this function will convert repay amount to repay shares then do the repay.
+   */
+  function repayByAmount(ERC20 _token, uint256 _amount)
+    external

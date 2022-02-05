@@ -801,3 +801,9 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param _token the ERC20 token of the pool that user want to repay
    * @param _share the amount of borrow shares thet user want to repay
    * User can call this function to repay the ERC20 token to the pool.
+   * This function will do the repay equal to repay shares
+   */
+  function repayByShare(ERC20 _token, uint256 _share)
+    external
+    nonReentrant
+    updatePoolWithInterestsAndTimestamp(_token)

@@ -807,3 +807,17 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     external
     nonReentrant
     updatePoolWithInterestsAndTimestamp(_token)
+    updateAlphaReward
+  {
+    repayInternal(_token, _share);
+  }
+
+  /**
+   * @dev repay the ERC20 token to the pool equal to repay shares
+   * @param _token the ERC20 token of the pool that user want to repay
+   * @param _share the amount of borrow shares thet user want to repay
+   * Internal function that do the repay. If Alice want to repay 10 borrow shares then the repay shares is 10.
+   * this function will repay the ERC20 token of Alice equal to repay shares value to the pool.
+   * If 1 repay shares equal to 2 Hello tokens then Alice will repay 20 Hello tokens to the pool. the Alice's
+   * borrow shares will be decreased.
+   */

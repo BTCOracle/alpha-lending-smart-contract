@@ -821,3 +821,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * If 1 repay shares equal to 2 Hello tokens then Alice will repay 20 Hello tokens to the pool. the Alice's
    * borrow shares will be decreased.
    */
+  function repayInternal(ERC20 _token, uint256 _share) internal {
+    Pool storage pool = pools[address(_token)];
+    UserPoolData storage userData = userPoolData[msg.sender][address(_token)];

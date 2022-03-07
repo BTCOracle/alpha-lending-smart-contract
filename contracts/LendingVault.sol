@@ -824,3 +824,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   function repayInternal(ERC20 _token, uint256 _share) internal {
     Pool storage pool = pools[address(_token)];
     UserPoolData storage userData = userPoolData[msg.sender][address(_token)];
+    require(
+      pool.status == PoolStatus.ACTIVE || pool.status == PoolStatus.CLOSED,
+      "can't repay to this pool"
+    );
+    uint256 paybackShares = _share;

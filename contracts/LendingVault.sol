@@ -829,3 +829,12 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       "can't repay to this pool"
     );
     uint256 paybackShares = _share;
+    if (paybackShares > userData.borrowShares) {
+      paybackShares = userData.borrowShares;
+    }
+
+    // 0. Claim alpha token from latest borrow
+    claimCurrentAlphaReward(_token, msg.sender);
+
+    // 1. calculate round up payback token
+    uint256 paybackAmount = calculateRoundUpBorrowAmount(_token, paybackShares);

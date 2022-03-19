@@ -838,3 +838,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
     // 1. calculate round up payback token
     uint256 paybackAmount = calculateRoundUpBorrowAmount(_token, paybackShares);
+
+    // 2. update pool state
+    pool.totalBorrows = pool.totalBorrows.sub(paybackAmount);
+    pool.totalBorrowShares = pool.totalBorrowShares.sub(paybackShares);
+

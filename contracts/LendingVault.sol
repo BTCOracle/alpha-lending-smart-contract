@@ -843,3 +843,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     pool.totalBorrows = pool.totalBorrows.sub(paybackAmount);
     pool.totalBorrowShares = pool.totalBorrowShares.sub(paybackShares);
 
+    // 3. update user state
+    userData.borrowShares = userData.borrowShares.sub(paybackShares);

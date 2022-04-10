@@ -845,3 +845,17 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
     // 3. update user state
     userData.borrowShares = userData.borrowShares.sub(paybackShares);
+
+    // 4. transfer payback tokens to the pool
+    _token.safeTransferFrom(msg.sender, address(this), paybackAmount);
+    emit Repay(address(_token), msg.sender, paybackShares, paybackAmount);
+  }
+
+  /**
+   * @dev withdraw the ERC20 token from the pool
+   * @param _token the ERC20 token of the pool that user want to withdraw
+   * @param _share the alToken amount that user want to withdraw
+   * When user withdraw their liquidity shares or alToken, they will receive the ERC20 token from the pool
+   * equal to the alHello value.
+   * e.g. Bob want to withdraw 10 alHello. If 1 alHello equal to 10 Hello tokens then Bob will receive
+   * 100 Hello tokens after withdraw. Bob's alHello will be burned.

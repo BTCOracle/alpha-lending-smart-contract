@@ -859,3 +859,11 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * equal to the alHello value.
    * e.g. Bob want to withdraw 10 alHello. If 1 alHello equal to 10 Hello tokens then Bob will receive
    * 100 Hello tokens after withdraw. Bob's alHello will be burned.
+   * Note: Bob cannot withdraw his alHello if his account is not healthy which means he uses all of his liquidity as
+   * collateral to cover his loan so he cannot withdraw or transfer his alHello.
+   */
+  function withdraw(ERC20 _token, uint256 _share)
+    external
+    nonReentrant
+    updatePoolWithInterestsAndTimestamp(_token)
+    updateAlphaReward

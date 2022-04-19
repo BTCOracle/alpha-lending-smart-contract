@@ -867,3 +867,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     nonReentrant
     updatePoolWithInterestsAndTimestamp(_token)
     updateAlphaReward
+  {
+    Pool storage pool = pools[address(_token)];

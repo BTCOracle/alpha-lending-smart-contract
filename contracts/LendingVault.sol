@@ -869,3 +869,9 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     updateAlphaReward
   {
     Pool storage pool = pools[address(_token)];
+    uint256 alBalance = pool.alToken.balanceOf(msg.sender);
+    require(
+      pool.status == PoolStatus.ACTIVE || pool.status == PoolStatus.CLOSED,
+      "can't withdraw this pool"
+    );
+    uint256 withdrawShares = _share;

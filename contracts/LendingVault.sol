@@ -875,3 +875,4 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       "can't withdraw this pool"
     );
     uint256 withdrawShares = _share;
+    if (withdrawShares > alBalance) {

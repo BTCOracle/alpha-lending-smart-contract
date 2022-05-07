@@ -876,3 +876,13 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     );
     uint256 withdrawShares = _share;
     if (withdrawShares > alBalance) {
+      withdrawShares = alBalance;
+    }
+
+    // 1. calculate liquidity amount from shares
+    uint256 withdrawAmount = calculateRoundDownLiquidityAmount(_token, withdrawShares);
+
+    // 2. burn al tokens of user equal to shares
+    pool.alToken.burn(msg.sender, withdrawShares);
+
+    // 3. transfer ERC20 tokens to user account

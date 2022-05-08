@@ -886,3 +886,9 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     pool.alToken.burn(msg.sender, withdrawShares);
 
     // 3. transfer ERC20 tokens to user account
+    _token.transfer(msg.sender, withdrawAmount);
+
+    // 4. check account health. this transaction will revert if the account of this user is not healthy
+    require(isAccountHealthy(msg.sender), "account is not healthy. can't withdraw");
+    emit Withdraw(address(_token), msg.sender, withdrawShares, withdrawAmount);
+  }

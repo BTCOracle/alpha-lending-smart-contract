@@ -893,3 +893,14 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     emit Withdraw(address(_token), msg.sender, withdrawShares, withdrawAmount);
   }
 
+  /**
+   * @dev liquidate the unhealthy user account
+   * @param _user the address of the user that liquidator want to liquidate
+   * @param _token the token that liquidator whan to liquidate
+   * @param _liquidateShares the amount of token shares that liquidator want to liquidate
+   * @param _collateral the ERC20 token of the pool that liquidator will receive as a reward
+   * If the user's account health is not healthy, anothor user can become to the liquidator to liquidate
+   * the user account then got the collateral as a reward.
+   */
+  function liquidate(
+    address _user,

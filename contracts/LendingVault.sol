@@ -904,3 +904,17 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    */
   function liquidate(
     address _user,
+    ERC20 _token,
+    uint256 _liquidateShares,
+    ERC20 _collateral
+  )
+    external
+    nonReentrant
+    updatePoolWithInterestsAndTimestamp(_token)
+    updatePoolWithInterestsAndTimestamp(_collateral)
+    updateAlphaReward
+  {
+    liquidateInternal(_user, _token, _liquidateShares, _collateral);
+  }
+
+  /**

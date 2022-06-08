@@ -918,3 +918,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   }
 
   /**
+   * @dev liquidate the unhealthy user account (internal)
+   * @param _user the address of the user that liquidator want to liquidate
+   * @param _token the token that liquidator whan to liquidate
+   * @param _liquidateShares the amount of token shares that liquidator want to liquidate
+   * @param _collateral the ERC20 token of the pool that liquidator will receive as a reward

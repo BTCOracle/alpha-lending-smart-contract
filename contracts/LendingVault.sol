@@ -923,3 +923,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param _token the token that liquidator whan to liquidate
    * @param _liquidateShares the amount of token shares that liquidator want to liquidate
    * @param _collateral the ERC20 token of the pool that liquidator will receive as a reward
+   * e.g. Alice account is not healthy. Bob saw Alice account then want to liquidate 10 Hello borrow shares of Alice account
+   * and want to get the Seeyou tokens as the collateral. The steps that will happen is below:
+   * 1. Bob calls the liquidate function with _user is Alice address, _token is Hello token,
+   * _liquidateShare is 10, _collateral is Seeyou token to liquidate Alice account.

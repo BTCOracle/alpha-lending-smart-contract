@@ -927,3 +927,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * and want to get the Seeyou tokens as the collateral. The steps that will happen is below:
    * 1. Bob calls the liquidate function with _user is Alice address, _token is Hello token,
    * _liquidateShare is 10, _collateral is Seeyou token to liquidate Alice account.
+   * 2. Contract check if Alice account is in an unhealthy state or not. If Alice account is
+   * still healthy, Bob cannot liquidate this account then this transaction will be revert.
+   * 3. Contract check if the collateral that Bob has requested enable for the liquidation reward both on
+   * pool enabling and Alice enabling.

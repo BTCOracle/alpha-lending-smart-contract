@@ -931,3 +931,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * still healthy, Bob cannot liquidate this account then this transaction will be revert.
    * 3. Contract check if the collateral that Bob has requested enable for the liquidation reward both on
    * pool enabling and Alice enabling.
+   * 4. Bob can liquidate Alice account if Alice has been borrowing Hello tokens from the pool.
+   * 5. Bob can liquidate from 0 to the max liquidate shares which equal to 50% of Alice's Hello borrow share.
+   * 6. Contract calculates the amount of collateral that Bob will receive as the rewards to convert to
+   * the amount of Seeyou shares. Seeyou shares is the alSeeyou token.

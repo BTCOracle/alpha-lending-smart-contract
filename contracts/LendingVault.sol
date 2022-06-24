@@ -935,3 +935,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * 5. Bob can liquidate from 0 to the max liquidate shares which equal to 50% of Alice's Hello borrow share.
    * 6. Contract calculates the amount of collateral that Bob will receive as the rewards to convert to
    * the amount of Seeyou shares. Seeyou shares is the alSeeyou token.
+   * 7. Bob pays Hello tokens equal to 10 Hello shares. If 1 Hello shares equal to 10 Hello tokens then Bob will
+   * pay 100 Hello token to the pool
+   * 8. The borrowing shares of the Hello token on Alice account will be decreased. The alSeeyou of Alice will be burned.
+   * 9. Bob will get 105 alSeeyou tokens.

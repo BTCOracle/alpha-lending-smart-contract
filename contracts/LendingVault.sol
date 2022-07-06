@@ -939,3 +939,13 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * pay 100 Hello token to the pool
    * 8. The borrowing shares of the Hello token on Alice account will be decreased. The alSeeyou of Alice will be burned.
    * 9. Bob will get 105 alSeeyou tokens.
+   * 10. Bob can withdraw the alHello tokens later to get the Hello tokens from the pool.
+   * Note: Hello and Seeyou are the imaginary ERC20 token.
+   */
+  function liquidateInternal(
+    address _user,
+    ERC20 _token,
+    uint256 _liquidateShares,
+    ERC20 _collateral
+  ) internal {
+    Pool storage pool = pools[address(_token)];

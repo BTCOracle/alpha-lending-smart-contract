@@ -949,3 +949,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     ERC20 _collateral
   ) internal {
     Pool storage pool = pools[address(_token)];
+    Pool storage collateralPool = pools[address(_collateral)];
+    UserPoolData storage userCollateralData = userPoolData[_user][address(_collateral)];
+    UserPoolData storage userTokenData = userPoolData[_user][address(_token)];
+    require(
+      pool.status == PoolStatus.ACTIVE || pool.status == PoolStatus.CLOSED,

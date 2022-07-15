@@ -954,3 +954,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     UserPoolData storage userTokenData = userPoolData[_user][address(_token)];
     require(
       pool.status == PoolStatus.ACTIVE || pool.status == PoolStatus.CLOSED,
+      "can't liquidate this pool"
+    );
+

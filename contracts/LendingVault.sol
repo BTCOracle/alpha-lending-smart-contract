@@ -957,3 +957,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       "can't liquidate this pool"
     );
 
+    // 0. Claim alpha token from latest user borrow
+    claimCurrentAlphaReward(_token, _user);
+
+    // 1. check account health of user to make sure that liquidator can liquidate this account

@@ -961,3 +961,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     claimCurrentAlphaReward(_token, _user);
 
     // 1. check account health of user to make sure that liquidator can liquidate this account
+    require(!isAccountHealthy(_user), "user's account is healthy. can't liquidate this account");
+
+    // 2. check if the user enables collateral
+    require(
+      !userCollateralData.disableUseAsCollateral,

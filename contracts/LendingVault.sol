@@ -966,3 +966,4 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     // 2. check if the user enables collateral
     require(
       !userCollateralData.disableUseAsCollateral,
+      "user didn't enable the requested collateral"

@@ -977,3 +977,4 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
     // 4. check if the user has borrowed tokens that liquidator want to liquidate
     require(userTokenData.borrowShares > 0, "user didn't borrow this token");
+

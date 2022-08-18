@@ -978,3 +978,12 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     // 4. check if the user has borrowed tokens that liquidator want to liquidate
     require(userTokenData.borrowShares > 0, "user didn't borrow this token");
 
+    // 5. calculate liquidate amount and shares
+    uint256 maxPurchaseShares = userTokenData.borrowShares.wadMul(CLOSE_FACTOR);
+    uint256 liquidateShares = _liquidateShares;
+    if (liquidateShares > maxPurchaseShares) {
+      liquidateShares = maxPurchaseShares;
+    }
+    uint256 liquidateAmount = calculateRoundUpBorrowAmount(_token, liquidateShares);
+
+    // 6. calculate collateral amount and shares

@@ -987,3 +987,12 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     uint256 liquidateAmount = calculateRoundUpBorrowAmount(_token, liquidateShares);
 
     // 6. calculate collateral amount and shares
+    uint256 collateralAmount = calculateCollateralAmount(_token, liquidateAmount, _collateral);
+    uint256 collateralShares = calculateRoundUpLiquidityShareAmount(_collateral, collateralAmount);
+
+    // 7. transfer liquidate amount to the pool
+    _token.safeTransferFrom(msg.sender, address(this), liquidateAmount);
+
+    // 8. burn al token of user equal to collateral shares
+    require(
+      collateralPool.alToken.balanceOf(_user) > collateralShares,

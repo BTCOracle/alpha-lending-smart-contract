@@ -998,3 +998,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       collateralPool.alToken.balanceOf(_user) > collateralShares,
       "user collateral isn't enough"
     );
+    collateralPool.alToken.burn(_user, collateralShares);
+

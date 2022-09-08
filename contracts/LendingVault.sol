@@ -1000,3 +1000,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     );
     collateralPool.alToken.burn(_user, collateralShares);
 
+    // 9. mint al token equal to collateral shares to liquidator
+    collateralPool.alToken.mint(msg.sender, collateralShares);
+
+    // 10. update pool state
+    pool.totalBorrows = pool.totalBorrows.sub(liquidateAmount);

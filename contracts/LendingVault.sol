@@ -1005,3 +1005,13 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
     // 10. update pool state
     pool.totalBorrows = pool.totalBorrows.sub(liquidateAmount);
+    pool.totalBorrowShares = pool.totalBorrowShares.sub(liquidateShares);
+
+    // 11. update user state
+    userTokenData.borrowShares = userTokenData.borrowShares.sub(liquidateShares);
+
+    emit Liquidate(
+      _user,
+      address(_token),
+      address(_collateral),
+      liquidateAmount,

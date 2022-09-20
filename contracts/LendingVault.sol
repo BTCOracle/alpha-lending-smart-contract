@@ -1015,3 +1015,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       address(_token),
       address(_collateral),
       liquidateAmount,
+      liquidateShares,
+      collateralAmount,
+      collateralShares,
+      msg.sender

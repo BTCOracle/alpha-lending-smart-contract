@@ -1019,3 +1019,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       collateralAmount,
       collateralShares,
       msg.sender
+    );
+  }
+
+  /**
+   * @dev calculate collateral amount that the liquidator will receive after the liquidation

@@ -1024,3 +1024,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
   /**
    * @dev calculate collateral amount that the liquidator will receive after the liquidation
+   * @param _token the token that liquidator whan to liquidate
+   * @param _liquidateAmount the amount of token that liquidator want to liquidate
+   * @param _collateral the ERC20 token of the pool that liquidator will receive as a reward
+   * @return the collateral amount of the liquidation
+   * This function will be call on liquidate function to calculate the collateral amount that

@@ -1029,3 +1029,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param _collateral the ERC20 token of the pool that liquidator will receive as a reward
    * @return the collateral amount of the liquidation
    * This function will be call on liquidate function to calculate the collateral amount that
+   * liquidator will get after the liquidation. Liquidation bonus is expressed in percent. the collateral amount
+   * depends on each pool. If the Hello pool has liquidation bonus equal to 105% then the collateral value is
+   * more than the value of liquidated tokens around 5%. the formula is below:
+   * collateral amount = (token price * liquidate amount * liquidation bonus percent) / collateral price

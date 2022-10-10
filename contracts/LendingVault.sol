@@ -1033,3 +1033,11 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * depends on each pool. If the Hello pool has liquidation bonus equal to 105% then the collateral value is
    * more than the value of liquidated tokens around 5%. the formula is below:
    * collateral amount = (token price * liquidate amount * liquidation bonus percent) / collateral price
+   */
+  function calculateCollateralAmount(
+    ERC20 _token,
+    uint256 _liquidateAmount,
+    ERC20 _collateral
+  ) internal view returns (uint256) {
+    require(address(priceOracle) != address(0), "price oracle isn't initialized");
+    uint256 tokenPricePerUnit = priceOracle.getAssetPrice(address(_token));

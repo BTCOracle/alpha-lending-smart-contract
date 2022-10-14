@@ -1041,3 +1041,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   ) internal view returns (uint256) {
     require(address(priceOracle) != address(0), "price oracle isn't initialized");
     uint256 tokenPricePerUnit = priceOracle.getAssetPrice(address(_token));
+    require(tokenPricePerUnit > 0, "liquidated token price isn't correct");
+    uint256 collateralPricePerUnit = priceOracle.getAssetPrice(address(_collateral));

@@ -1043,3 +1043,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     uint256 tokenPricePerUnit = priceOracle.getAssetPrice(address(_token));
     require(tokenPricePerUnit > 0, "liquidated token price isn't correct");
     uint256 collateralPricePerUnit = priceOracle.getAssetPrice(address(_collateral));
+    require(collateralPricePerUnit > 0, "collateral price isn't correct");
+    uint256 liquidationBonus = pools[address(_token)].poolConfig.getLiquidationBonusPercent();

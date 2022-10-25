@@ -1045,3 +1045,10 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     uint256 collateralPricePerUnit = priceOracle.getAssetPrice(address(_collateral));
     require(collateralPricePerUnit > 0, "collateral price isn't correct");
     uint256 liquidationBonus = pools[address(_token)].poolConfig.getLiquidationBonusPercent();
+    return (
+      tokenPricePerUnit.mul(_liquidateAmount).wadMul(liquidationBonus).div(collateralPricePerUnit)
+    );
+  }
+
+  /**
+   * @dev set reserve percent for admin

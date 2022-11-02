@@ -1056,3 +1056,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    */
   function setReservePercent(uint256 _reservePercent) external onlyOwner {
     uint256 previousReservePercent = reservePercent;
+    reservePercent = _reservePercent;
+    emit ReservePercentUpdated(previousReservePercent, reservePercent);
+  }
+

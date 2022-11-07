@@ -1060,3 +1060,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     emit ReservePercentUpdated(previousReservePercent, reservePercent);
   }
 
+  /**
+   * @dev withdraw function for admin to get the reserves
+   * @param _token the ERC20 token of the pool to withdraw
+   * @param _amount amount to withdraw

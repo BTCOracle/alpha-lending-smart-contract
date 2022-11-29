@@ -1064,3 +1064,21 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @dev withdraw function for admin to get the reserves
    * @param _token the ERC20 token of the pool to withdraw
    * @param _amount amount to withdraw
+   */
+  function withdrawReserve(ERC20 _token, uint256 _amount)
+    external
+    nonReentrant
+    updatePoolWithInterestsAndTimestamp(_token)
+    onlyOwner
+  {
+    Pool storage pool = pools[address(_token)];
+    uint256 poolBalance = _token.balanceOf(address(this));
+    require(_amount <= poolBalance, "pool balance insufficient");
+    // admin can't withdraw more than pool's reserve
+    require(_amount <= pool.poolReserves, "amount is more than pool reserves");
+    _token.safeTransfer(msg.sender, _amount);
+    pool.poolReserves = pool.poolReserves.sub(_amount);
+    emit ReserveWithdrawn(address(_token), _amount, msg.sender);
+  }
+
+  // ================== 💸💸💸 Distribute AlphaToken 💸💸💸 ========================

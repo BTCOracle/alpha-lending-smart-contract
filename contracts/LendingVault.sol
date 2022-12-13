@@ -1082,3 +1082,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   }
 
   // ================== 💸💸💸 Distribute AlphaToken 💸💸💸 ========================
+
+  /**
+    @dev set distributor address
+   */

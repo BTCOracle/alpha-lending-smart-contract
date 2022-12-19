@@ -1086,3 +1086,10 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   /**
     @dev set distributor address
    */
+  function setDistributor(IAlphaDistributor _distributor) public onlyOwner {
+    distributor = _distributor;
+  }
+
+  /**
+    @dev set vesting alpha address
+   */

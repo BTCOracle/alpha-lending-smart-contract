@@ -1093,3 +1093,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   /**
     @dev set vesting alpha address
    */
+  function setVestingAlpha(IVestingAlpha _vestingAlpha) public onlyOwner {
+    vestingAlpha = _vestingAlpha;
+  }
+
+  /**

@@ -1098,3 +1098,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   }
 
   /**
+   * @dev implement function of IAlphaReceiver interface to
+   * receive Alpha token rewards from the distributor
+   * @param _amount the amount of Alpha token to receive
+   */
+  function receiveAlpha(uint256 _amount) external override {

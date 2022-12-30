@@ -1103,3 +1103,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param _amount the amount of Alpha token to receive
    */
   function receiveAlpha(uint256 _amount) external override {
+    require(msg.sender == address(distributor), "Only distributor can call receive Alpha");
+    // Calculate total borrow value.
+    uint256[] memory borrows = new uint256[](tokenList.length);
+    uint256 totalBorrow = 0;
+

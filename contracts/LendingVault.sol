@@ -1108,3 +1108,5 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     uint256[] memory borrows = new uint256[](tokenList.length);
     uint256 totalBorrow = 0;
 
+    for (uint256 i = 0; i < tokenList.length; i++) {
+      if (pools[address(tokenList[i])].status == PoolStatus.ACTIVE) {

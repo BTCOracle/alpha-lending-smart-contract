@@ -1110,3 +1110,9 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
 
     for (uint256 i = 0; i < tokenList.length; i++) {
       if (pools[address(tokenList[i])].status == PoolStatus.ACTIVE) {
+        borrows[i] = totalBorrowInUSD(tokenList[i]);
+        totalBorrow = totalBorrow.add(borrows[i]);
+      }
+    }
+    // This contract should not receive alpha token if no borrow value lock in.
+    if (totalBorrow == 0) {

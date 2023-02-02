@@ -1116,3 +1116,25 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     }
     // This contract should not receive alpha token if no borrow value lock in.
     if (totalBorrow == 0) {
+      return;
+    }
+    distributor.alphaToken().transferFrom(msg.sender, address(this), _amount);
+    for (uint256 i = 0; i < borrows.length; i++) {
+      Pool storage pool = pools[address(tokenList[i])];
+      if (pool.status == PoolStatus.ACTIVE) {
+        uint256 portion = _amount.mul(borrows[i]).div(totalBorrow);
+        (uint256 lendersGain, uint256 borrowersGain) = splitReward(tokenList[i], portion);
+        // Distribute the Alpha token to the lenders (AlToken holder)
+        distributor.alphaToken().approve(address(pool.alToken), lendersGain);
+        pool.alToken.receiveAlpha(lendersGain);
+
+        // Distribute the Alpha token to the borrowers
+        updateBorrowAlphaReward(pool, borrowersGain);
+      }
+    }
+  }
+
+  /**
+   * @dev claim Alpha token rewards from all ERC20 token pools and create receipt for caller
+   */
+  function claimAlpha() external updateAlphaReward nonReentrant {

@@ -1138,3 +1138,9 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @dev claim Alpha token rewards from all ERC20 token pools and create receipt for caller
    */
   function claimAlpha() external updateAlphaReward nonReentrant {
+    for (uint256 i = 0; i < tokenList.length; i++) {
+      Pool storage pool = pools[address(tokenList[i])];
+
+      // claim Alpha rewards as a lender
+      pool.alToken.claimCurrentAlphaRewardByOwner(msg.sender);
+

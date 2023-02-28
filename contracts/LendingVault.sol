@@ -1144,3 +1144,18 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       // claim Alpha rewards as a lender
       pool.alToken.claimCurrentAlphaRewardByOwner(msg.sender);
 
+      // claim Alpha reward as a borrower
+      claimCurrentAlphaReward(tokenList[i], msg.sender);
+    }
+  }
+
+  /**
+   * @dev update Alpha rewards for the borrower of the ERC20 pool
+   * @param _pool the ERC20 token pool to update the Alpha rewards
+   * @param _amount the total amount of the rewards to all borrowers of the pool
+   */
+  function updateBorrowAlphaReward(Pool storage _pool, uint256 _amount) internal {
+    _pool.totalAlphaTokenReward = _pool.totalAlphaTokenReward.add(_amount);
+    if (_pool.totalBorrowShares == 0) {
+      return;
+    }

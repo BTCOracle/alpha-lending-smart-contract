@@ -1159,3 +1159,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     if (_pool.totalBorrowShares == 0) {
       return;
     }
+    _pool.alphaMultiplier = _pool.alphaMultiplier.add(
+      _amount.mul(1e12).div(_pool.totalBorrowShares)
+    );
+  }
+

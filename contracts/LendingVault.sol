@@ -1164,3 +1164,12 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     );
   }
 
+  /**
+   * @dev split the Alpha rewards between the lenders and borrowers
+   * @param _token the ERC20 token pool
+   * @param _amount the amount of Alpha token rewards to split
+   * @return lendersGain - the rewards's lenders gain
+   * borrowersGain - the rewards's borrower gain
+   */
+  function splitReward(ERC20 _token, uint256 _amount)
+    internal

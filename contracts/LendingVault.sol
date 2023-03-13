@@ -1173,3 +1173,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    */
   function splitReward(ERC20 _token, uint256 _amount)
     internal
+    view
+    returns (uint256 lendersGain, uint256 borrowersGain)
+  {
+    Pool storage pool = pools[address(_token)];
+    uint256 utilizationRate = pool.poolConfig.getUtilizationRate(

@@ -1178,3 +1178,9 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   {
     Pool storage pool = pools[address(_token)];
     uint256 utilizationRate = pool.poolConfig.getUtilizationRate(
+      pool.totalBorrows,
+      getTotalLiquidity(_token)
+    );
+    uint256 optimal = pool.poolConfig.getOptimalUtilizationRate();
+    if (utilizationRate <= optimal) {
+      // lenders gain = amount * ((EQUILIBRIUM / OPTIMAL) * utilization rate)

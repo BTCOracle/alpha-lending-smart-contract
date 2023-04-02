@@ -1184,3 +1184,6 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     uint256 optimal = pool.poolConfig.getOptimalUtilizationRate();
     if (utilizationRate <= optimal) {
       // lenders gain = amount * ((EQUILIBRIUM / OPTIMAL) * utilization rate)
+      lendersGain = (optimal == 0)
+        ? 0
+        : _amount.wadMul(EQUILIBRIUM).wadMul(utilizationRate).wadDiv(optimal);

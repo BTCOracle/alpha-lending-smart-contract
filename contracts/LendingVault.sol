@@ -1187,3 +1187,27 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       lendersGain = (optimal == 0)
         ? 0
         : _amount.wadMul(EQUILIBRIUM).wadMul(utilizationRate).wadDiv(optimal);
+    } else {
+      // lenders gain = amount * ((EQUILIBRIUM * (utilization rate - OPTIMAL)) / (MAX_UTILIZATION_RATE - OPTIMAL)) + EQUILIBRIUM)
+      lendersGain = (utilizationRate >= MAX_UTILIZATION_RATE)
+        ? _amount
+        : _amount.wadMul(
+          EQUILIBRIUM
+            .wadMul(utilizationRate.sub(optimal))
+            .wadDiv(MAX_UTILIZATION_RATE.sub(optimal))
+            .add(EQUILIBRIUM)
+        );
+    }
+    // borrowers gain = amount - lenders gain
+    borrowersGain = _amount.sub(lendersGain);
+  }
+
+  function calculateAlphaReward(ERC20 _token, address _account) public view returns (uint256) {
+    Pool storage pool = pools[address(_token)];
+    UserPoolData storage userData = userPoolData[_account][address(_token)];
+    //               reward start block                                        now
+    // Global                |----------------|----------------|----------------|
+    // User's latest reward  |----------------|----------------|
+    // User's Alpha rewards                                    |----------------|
+    // reward = [(Global Alpha multiplier - user's lastest Alpha multiplier) * user's Alpha token] / 1e12
+    uint256 pending = pool

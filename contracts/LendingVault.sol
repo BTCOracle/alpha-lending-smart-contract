@@ -1211,3 +1211,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     // User's Alpha rewards                                    |----------------|
     // reward = [(Global Alpha multiplier - user's lastest Alpha multiplier) * user's Alpha token] / 1e12
     uint256 pending = pool
+      .alphaMultiplier
+      .sub(userData.latestAlphaMultiplier)
+      .mul(userData.borrowShares)
+      .div(1e12);
+    return pending < pool.totalAlphaTokenReward ? pending : pool.totalAlphaTokenReward;

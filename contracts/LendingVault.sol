@@ -1216,3 +1216,11 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       .mul(userData.borrowShares)
       .div(1e12);
     return pending < pool.totalAlphaTokenReward ? pending : pool.totalAlphaTokenReward;
+  }
+
+  /**
+   * @dev claim Alpha tokens rewards
+   * @param _token the ERC20 pool
+   * @param _account the user account that will claim the Alpha tokens
+   */
+  function claimCurrentAlphaReward(ERC20 _token, address _account) internal {

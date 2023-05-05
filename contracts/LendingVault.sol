@@ -1224,3 +1224,9 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
    * @param _account the user account that will claim the Alpha tokens
    */
   function claimCurrentAlphaReward(ERC20 _token, address _account) internal {
+    // No op if alpha distributor didn't be set in lending pool.
+    if (address(distributor) == address(0)) {
+      return;
+    }
+    Pool storage pool = pools[address(_token)];
+    UserPoolData storage userData = userPoolData[_account][address(_token)];

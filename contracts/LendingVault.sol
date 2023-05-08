@@ -1230,3 +1230,4 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
     }
     Pool storage pool = pools[address(_token)];
     UserPoolData storage userData = userPoolData[_account][address(_token)];
+    uint256 reward = calculateAlphaReward(_token, _account);

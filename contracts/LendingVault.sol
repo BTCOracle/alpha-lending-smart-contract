@@ -1237,3 +1237,8 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
   }
 
   /**
+   * @dev send Alpha tokens to the recipient
+   * @param _recipient the recipient of the Alpha reward
+   * @param _amount the Alpha reward amount to send
+   */
+  function sendAlphaReward(address _recipient, uint256 _amount) internal {

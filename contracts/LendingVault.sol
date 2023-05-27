@@ -1246,3 +1246,7 @@ contract LendingPool is Ownable, ILendingPool, IAlphaReceiver, ReentrancyGuard {
       distributor.alphaToken().transfer(_recipient, _amount);
     } else {
       distributor.alphaToken().approve(address(vestingAlpha), _amount);
+      vestingAlpha.accumulateAlphaToUser(_recipient, _amount);
+    }
+  }
+}
